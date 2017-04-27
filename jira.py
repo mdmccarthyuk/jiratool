@@ -14,10 +14,13 @@ def doQuery(args):
   if args.format == 'json':
     print r.text
     sys.exit(0)
-  if args.format == 'text':
+  elif args.format == 'text':
     jsonData = json.loads(r.text)
     for item in jsonData['issues']:
       print item['key'] + " - " + item['fields']['summary']
+  else:
+    print "ERROR: Invalid output format specified"
+    sys.exit(1)
 
 def getConfig():
   if (os.path.isfile("config.json")):

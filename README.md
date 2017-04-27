@@ -1,7 +1,8 @@
 # jiratool
 A tool to query Jira via the REST API. 
 
-Usage
+**Usage**
+
 Create a config.json similar to the following:
 ```
 {

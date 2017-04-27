@@ -11,7 +11,13 @@ def doQuery(args):
     'Content-Type' : 'application/json'}
   url = confFile['config']['url']+"search?jql="+args.query
   r = requests.get(url, headers=headers)
-  print r.text
+  if args.format == 'json':
+    print r.text
+    sys.exit(0)
+  if args.format == 'text':
+    jsonData = json.loads(r.text)
+    for item in jsonData['issues']:
+      print item['key'] + " - " + item['fields']['summary']
 
 def getConfig():
   if (os.path.isfile("config.json")):
@@ -28,6 +34,7 @@ if __name__ == "__main__":
 
   parser_query = subparsers.add_parser('query')
   parser_query.add_argument('-q','--query',required=True)
+  parser_query.add_argument('-f','--format',default='json')
   parser_query.set_defaults(func=doQuery)
 
   args = parser.parse_args()

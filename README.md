@@ -16,5 +16,5 @@ Create a config.json similar to the following:
 
 Example usage:
 ```
-./jira.py query -q "assignee=mike&maxItems=5"
+./jiratool.py query -q "assignee in ('mike.mccarthy','admin') and status = 'closed'" -f history --field status -v 
 ```
